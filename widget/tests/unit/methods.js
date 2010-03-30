@@ -21,19 +21,22 @@
 	});
 	
 	test("enable", function(){
-		expect(1);
+		expect(2);
 	 
 		el = $("select").multiselect().multiselect("disable").multiselect("enable");
-			ok( !widget().is(":disabled"), "disable then re-enable widget" );
+			ok( !widget().is(":disabled"), "Widget is enabled" );
+			ok( !el.is(":disabled"), "Original select is enabled" );
 		el.multiselect("destroy");
 	});
 	
 	test("disable", function(){
-		expect(1);
+		expect(2);
 	 
-		el = $("select").multiselect().multiselect("disable");
-			ok( widget().is(":disabled"), 'Disable widget');
-		el.multiselect("destroy");
+	 	// clone this one so the original is not affected
+		el = $("select").clone(true).insertAfter("body").multiselect().multiselect("disable");
+			ok( widget().is(":disabled"), 'Widget is disabled');
+			ok( el.is(":disabled"), 'Original select is disabled');
+		el.multiselect("destroy").remove();
 	});
 	
 	test("widget", function(){

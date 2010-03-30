@@ -50,9 +50,9 @@ $.widget("ui.multiselect", {
 			isDisabled = el.is(':disabled'),
 			title = el.attr('title');
 
-		this.speed = 400; // default speed for effects. UI's default is 400.
+		this.speed = 400; // default speed for effects. UI's default is 400. TODO move to options?
 		this._isOpen = false; // assume no
-		
+
 		// the actual button
 		html.push('<button type="button" class="ui-multiselect ui-widget ui-state-default ui-corner-all' + (isDisabled ? ' ui-state-disabled' : '') + '"');
 		if(title.length){
@@ -346,6 +346,7 @@ $.widget("ui.multiselect", {
 	_toggleDisabled: function(flag){
 		this.button.attr('disabled', (flag ? 'disabled' : ''))[ flag ? 'addClass' : 'removeClass' ]('ui-state-disabled');
 		this.menu.find('input').attr('disabled', (flag ? 'disabled' : '')).parent()[ flag ? 'addClass' : 'removeClass' ]('ui-state-disabled');
+		this.element.attr('disabled', (flag ? 'disabled' : ''));
 	},
 	
 	// open the menu
