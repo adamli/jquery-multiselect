@@ -382,14 +382,11 @@ $.widget("ui.multiselect", {
 			speed = o.show[1] || self.speed;
 		}
 
-		// show the options div + position it.
-		// 2 positions are necessary for some effects.  very buggy to support all cases otherwise, unfortunately
+		// show the menu + position it.
 		this.menu
-		.css({ top:0, left:0 })
 		.width( self.width-parseInt(self.menu.css('padding-left'),10)-parseInt(self.menu.css('padding-right'),10)-2 )
-		.position({ my:"left top", at:"left bottom", of:self.menu.prev() })
+		.position({ my:"left top", at:"left bottom", of:self.button })
 		.show(effect, speed);
-		//.position({ my:"left top", at:"left bottom", of:self.menu.prev() });
 		
 		this._isOpen = true;
 		
