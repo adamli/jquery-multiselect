@@ -58,7 +58,7 @@ $.widget("ui.multiselect", {
 		if(title.length){
 			html.push(' title="'+title+'"');
 		}
-		html.push('><span>' + o.noneSelectedText + '</span><span class="ui-icon ui-icon-triangle-1-s"></span></button>');
+		html.push('><span class="ui-icon ui-icon-triangle-1-s"></span>'+ o.noneSelectedText +'</button>');
 		
 		// start menu contaner
 		html.push('<div class="ui-multiselect-menu ui-widget ui-widget-content ui-corner-all">');
@@ -308,8 +308,7 @@ $.widget("ui.multiselect", {
 				value = o.selectedText.replace('#', numChecked).replace('#', $inputs.length);
 			}
 		}
-		
-		this.button.find('span').eq(0).text(value);
+		this.button.contents()[1].nodeValue = value;
 		return value;
 	},
 
