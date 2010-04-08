@@ -23,7 +23,7 @@ $.widget("ui.multiselect", {
 	// default options
 	options: {
 		header: true,
-		maxHeight: 175, /* max height of the checkbox container (scroll) in pixels */
+		height: 175, /* height of the checkbox container (scroll) in pixels */
 		minWidth: 210, /* min width of the entire widget in pixels. setting to 'auto' will disable */
 		checkAllText: 'Check all',
 		uncheckAllText: 'Uncheck all',
@@ -392,7 +392,7 @@ $.widget("ui.multiselect", {
 		this._isOpen = true;
 		
 		// set the scroll of the checkbox container
-		$container.scrollTop(0).height(o.maxHeight);
+		$container.scrollTop(0).height(o.height);
 		
 		o.open.call( this.menu[0] );
 	},
@@ -480,6 +480,9 @@ $.widget("ui.multiselect", {
 				break;
 			case "uncheckAllText":
 				this.menu.find('a.ui-multiselect-none span').eq(-1).text(value);
+				break;
+			case "height":
+				this.menu.find('ul:last').height( parseInt(value,10) );
 				break;
 		}
 
