@@ -307,7 +307,7 @@ $.widget("ui.multiselect", {
 				-parseInt(m.css('padding-left'),10)
 				-parseInt(m.css('padding-right'),10)
 				-parseInt(m.css('border-right-width'),10)
-				-parseInt(m.css('border-left-width'), 10);
+				-parseInt(m.css('border-left-width'),10);
 		m.width( width );
 	},
 	
@@ -333,7 +333,7 @@ $.widget("ui.multiselect", {
 		return value;
 	},
 
-	// move up or down within the menu.  TODO make private?
+	// move up or down within the menu
 	_traverse: function(keycode, start){
 		var $start = $(start),
 			moveToLast = (keycode === 38 || keycode === 37) ? true : false,
@@ -404,10 +404,11 @@ $.widget("ui.multiselect", {
 		}
 		
 		// show the menu + position it.  FIXME widget must be visible before positioning it, which breaks animations
-		this.menu
-		.css({ top:0, left:0 }) // prevents weird positioning problems when widget is continuously opened/closed
-		.show(effect, speed)
-		.position({ my:"left top", at:"left bottom", of:self.button });
+		if(!effect.length){
+			this.menu.css({ top:0, left:0 });
+		}
+		
+		this.menu.show(effect, speed).position({ my:"left top", at:"left bottom", of:self.button });
 		
 		this._isOpen = true;
 		
