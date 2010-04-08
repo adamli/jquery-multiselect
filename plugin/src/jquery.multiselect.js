@@ -364,7 +364,7 @@
 	$.fn.multiSelect.defaults = {
 		showHeader: true,
 		maxHeight: 175, /* max height of the checkbox container (scroll) in pixels */
-		minWidth: 200, /* min width of the entire widget in pixels. setting to 'auto' will disable */
+		minWidth: 215, /* min width of the entire widget in pixels. setting to 'auto' will disable */
 		checkAllText: 'Check all',
 		unCheckAllText: 'Uncheck all',
 		noneSelectedText: 'Select options',
