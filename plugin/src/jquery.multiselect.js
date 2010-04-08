@@ -23,7 +23,7 @@
 		var $select = $original = $(select), $options, $header, $labels, html = [], optgroups = [], isDisabled = $select.is(':disabled');
 		
 		html.push('<a id="'+ select.id +'" class="ui-multiselect ui-widget ui-state-default ui-corner-all' + (isDisabled || o.disabled ? ' ui-state-disabled' : '') + '">');
-		html.push('<input readonly="readonly" type="text" class="ui-state-default" value="'+ o.noneSelectedText +'" /><span class="ui-icon ui-icon-triangle-1-s"></span></a>');
+		html.push('<input readonly="readonly" type="text" class="ui-state-default" value="'+ o.noneSelectedText +'" title="'+ select.title +'" /><span class="ui-icon ui-icon-triangle-1-s"></span></a>');
 		html.push('<div class="ui-multiselect-options' + (o.shadow ? ' ui-multiselect-shadow' : '') + ' ui-widget ui-widget-content ui-corner-all">');
 	
 		if(o.showHeader){
@@ -134,7 +134,7 @@
 				}
 			}
 			
-			$select.find('input').val(value).attr('title', value);
+			$select.find('input').val(value);
 			return value;
 		};
 		
