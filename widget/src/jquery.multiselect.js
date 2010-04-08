@@ -484,6 +484,9 @@ $.widget("ui.multiselect", {
 			case "height":
 				this.menu.find('ul:last').height( parseInt(value,10) );
 				break;
+			case "selectedText":
+				this._updateSelected();
+				break;
 		}
 
 	}
