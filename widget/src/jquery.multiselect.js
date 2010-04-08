@@ -382,12 +382,12 @@ $.widget("ui.multiselect", {
 			speed = o.show[1] || self.speed;
 		}
 
-		// show the menu + position it.
+		// show the menu + position it.  FIXME widget must be visible before positioning it, which breaks animations
 		this.menu
 		.css({ top:0, left:0 }) // prevents weird positioning problems when widget is continuously opened/closed
 		.width( self.width-parseInt(self.menu.css('padding-left'),10)-parseInt(self.menu.css('padding-right'),10)-2 )
-		.position({ my:"left top", at:"left bottom", of:self.button })
-		.show(effect, speed);
+		.show(effect, speed)
+		.position({ my:"left top", at:"left bottom", of:self.button });
 		
 		this._isOpen = true;
 		
