@@ -109,26 +109,21 @@ $.widget("ui.multiselect", {
 		// close everything off
 		html.push('</ul></div>');
 		
+		// cache elements
 		this.button		= el.after( html.join('') ).hide().next('button').data('selectelement', el);
 		this.menu		= this.button.next('div.ui-multiselect-menu');
 		this.labels		= this.menu.find('label');
 		this.optiontags	= this.element.find("option");
 		
+		// set widths
 		this._setButtonWidth();
 		this._setMenuWidth();
+		
+		// perform event bindings
 		this._bindEvents();
 
 		// update the number of selected elements when the page initially loads, and use that as the defaultValue.  necessary for form resets when options are pre-selected.
 		this.button[0].defaultValue = this._updateSelected();
-	
-		// close each select when clicking on any other element/anywhere else on the page
-		$(document).bind('click', function(e){
-			var $target = $(e.target);
-
-			if(self._isOpen && !$target.closest('div.ui-multiselect-menu').length && !$target.is('button.ui-multiselect')){
-				self.close('all');
-			}
-		});
 		
 		return this;
 	},
@@ -280,6 +275,15 @@ $.widget("ui.multiselect", {
 			self.optiontags.filter(function(){ return this.value === val; }).attr("selected", action);
 			self.options.check.call(this);
 			self._updateSelected();
+		});
+		
+		// close each select when clicking on any other element/anywhere else on the page
+		$(document).bind('click', function(e){
+			var $target = $(e.target);
+
+			if(self._isOpen && !$target.closest('div.ui-multiselect-menu').length && !$target.is('button.ui-multiselect')){
+				self.close('all');
+			}
 		});
 	},
 
