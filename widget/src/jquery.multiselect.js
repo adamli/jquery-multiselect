@@ -115,6 +115,7 @@ $.widget("ui.multiselect", {
 		this.optiontags	= this.element.find("option");
 		
 		this._setButtonWidth();
+		this._setMenuWidth();
 		this._bindEvents();
 
 		// update the number of selected elements when the page initially loads, and use that as the defaultValue.  necessary for form resets when options are pre-selected.
@@ -298,7 +299,7 @@ $.widget("ui.multiselect", {
 	// set menu width
 	_setMenuWidth: function(){
 		var m = this.menu,
-			width = this.options.minWidth
+			width = this.button.width()
 				-parseInt(m.css('padding-left'),10)
 				-parseInt(m.css('padding-right'),10)
 				-parseInt(m.css('border-right-width'),10)
@@ -398,8 +399,6 @@ $.widget("ui.multiselect", {
 			speed = o.show[1] || self.speed;
 		}
 		
-		this._setMenuWidth();
-
 		// show the menu + position it.  FIXME widget must be visible before positioning it, which breaks animations
 		this.menu
 		.css({ top:0, left:0 }) // prevents weird positioning problems when widget is continuously opened/closed
