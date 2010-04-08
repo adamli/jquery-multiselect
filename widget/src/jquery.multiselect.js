@@ -114,15 +114,7 @@ $.widget("ui.multiselect", {
 		this.labels		= this.menu.find('label');
 		this.optiontags	= this.element.find("option");
 		
-		// calculate widths
-		this.width = this.element.outerWidth();
-		if( /\d/.test(o.minWidth) && this.width < o.minWidth){
-			this.width = o.minWidth;
-		}
-		
-		// set widths
-		this.button.width( this.width );
-		
+		this._setButtonWidth();
 		this._bindEvents();
 
 		// update the number of selected elements when the page initially loads, and use that as the defaultValue.  necessary for form resets when options are pre-selected.
@@ -290,6 +282,30 @@ $.widget("ui.multiselect", {
 		});
 	},
 
+	// set button width
+	_setButtonWidth: function(){
+		var width = this.element.outerWidth(),
+			o = this.options;
+			
+		if( /\d/.test(o.minWidth) && width < o.minWidth){
+			width = o.minWidth;
+		}
+		
+		// set widths
+		this.button.width( width );
+	},
+	
+	// set menu width
+	_setMenuWidth: function(){
+		var m = this.menu,
+			width = this.options.minWidth
+				-parseInt(m.css('padding-left'),10)
+				-parseInt(m.css('padding-right'),10)
+				-parseInt(m.css('border-right-width'),10)
+				-parseInt(m.css('border-left-width'), 10);
+		m.width( width );
+	},
+	
 	// updates the number of selected items in the button
 	_updateSelected: function(){
 		var o = this.options,
@@ -381,11 +397,12 @@ $.widget("ui.multiselect", {
 			effect = o.show[0];
 			speed = o.show[1] || self.speed;
 		}
+		
+		this._setMenuWidth();
 
 		// show the menu + position it.  FIXME widget must be visible before positioning it, which breaks animations
 		this.menu
 		.css({ top:0, left:0 }) // prevents weird positioning problems when widget is continuously opened/closed
-		.width( self.width-parseInt(self.menu.css('padding-left'),10)-parseInt(self.menu.css('padding-right'),10)-2 )
 		.show(effect, speed)
 		.position({ my:"left top", at:"left bottom", of:self.button });
 		
@@ -483,6 +500,11 @@ $.widget("ui.multiselect", {
 				break;
 			case "height":
 				this.menu.find('ul:last').height( parseInt(value,10) );
+				break;
+			case "minWidth":
+				this.options[ key ] = parseInt(value,10);
+				this._setButtonWidth();
+				this._setMenuWidth();
 				break;
 			case "selectedText":
 			case "selectedList":
