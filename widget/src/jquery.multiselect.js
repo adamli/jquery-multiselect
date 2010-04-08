@@ -385,6 +385,7 @@ $.widget("ui.multiselect", {
 
 		// show the menu + position it.
 		this.menu
+		.css({ top:0, left:0 }) // prevents weird positioning problems when widget is continuously opened/closed
 		.width( self.width-parseInt(self.menu.css('padding-left'),10)-parseInt(self.menu.css('padding-right'),10)-2 )
 		.position({ my:"left top", at:"left bottom", of:self.button })
 		.show(effect, speed);
